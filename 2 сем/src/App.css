@@ -1,0 +1,109 @@
+.App {
+    margin-left: 700px;
+}
+
+h1{
+    margin-left: 140px;
+}
+
+Button{
+    margin-left: 157px;
+}
+
+tr {
+    display: flex;
+}
+
+td {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    width: 40px;
+    height: 40px;
+}
+.Sudoku {
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    grid-template-rows: repeat(9, 40px);
+    background-color: #f0f0f0;
+    padding: 10px;
+    width: 362px;
+    height: 362px;
+}
+
+.Cell {
+    font-size: 16px;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    width: 40px;
+    height: 40px;
+}
+
+.Cell:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px #007bff;
+}
+
+.Sudoku .Cell:nth-child(3n) {
+    border-right-width: 5px;
+}
+
+.Sudoku .Cell:nth-child(3n + 1) {
+    border-left-width: 5px;
+}
+
+.Sudoku .Cell:nth-child(n) {
+    border-top-width: 5px;
+}
+
+.Sudoku .Cell:nth-child(n + 1) {
+    border-bottom-width: 5px;
+}
+
+.RedCell{
+    background: rgba(255, 0, 0, 0.4);
+}
+.YellowCell{
+    background: rgba(255, 255, 0, 0.4);
+}
+.GreenCell{
+    background: rgba(0, 255, 0, 0.4);
+}
+.fd{
+    position: absolute;
+    height: 397px;
+    width: 2px;
+    background: black;
+    margin-left: 131px;
+    margin-top: 2px;
+}
+.sd{
+    position: absolute;
+    height: 397px;
+    width: 2px;
+    background: black;
+    margin-left: 263px;
+    margin-top: 2px;
+}
+.td{
+    position: absolute;
+    height: 2px;
+    width: 399px;
+    background: black;
+    margin-top: 132px;
+}
+.frd{
+    position: absolute;
+    height: 2px;
+    width: 399px;
+    background: black;
+    margin-top: 264px;
+}

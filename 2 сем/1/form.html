@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   input[type="text"]{
+        color: rgba(255,255,255,1);
+        box-shadow: inset 0 0 10px rgba(255,255,255, .75);
+        background-color: rgba(255,255,255,.5);
+    }
+    td {
+        color: black; size: 1.2em;
+    }
+    #inf{
+        width: 20em;
+        height: 10em;
+    }
+    .errmess{
+        color: red;
+    }
+</style>
+<body>
+    <form id="form1" style="background-color: white;">
+        <caption style="color: black; margin-top: 10px; margin-bottom: 10px;"><b>Валидация формы</b></caption>
+        <table>
+
+            <tr>
+                <td >Фамилия:</td>
+                <td><input id = "sname" type = "text"> </td>
+                <td><span class ="errmess" id = "errsname"></span></td>
+            </tr>
+            <tr>
+                <td>Имя:</td>
+                <td><input id = "name" type = "text" ></td>
+                <td><span class ="errmess" id = "errname"></span></td>
+            </tr>
+            <tr>
+                <td>E - mail:</td>
+                <td><input id = "email" type="text"></td>
+                <td><span class ="errmess" id = "erremail"></span></td>
+            </tr>
+            <tr>
+                <td>Телефон (0xx)xxx-xx-xx :</td>
+                <td> <input id ="phone" type="text"></td>
+                <td><span class ="errmess" id = "errphone"></span></td>
+            </tr>
+            <tr>
+                <td>Город :</td>
+                <td>
+                    <select id = "city">
+                        <option>Выберите вариант</option>
+                        <option>Пинск</option>
+                        <option>Узда</option>
+                        <option>Барановичи</option>
+                        <option>Минск</option>
+                    </select>
+                </td>
+                <td><span class ="errmess" id = "errcity"></span></td>
+            </tr>
+            <tr>
+                <td>Я учусь в БГТУ :</td>
+                <td><span><input id = "bstu" type ="checkbox"> </span></td>
+                <td><span class ="errmess" id = "errbstu"></span></td>
+            </tr>
+            <tr>
+                <td>На каком курсе вы учитесь?</td>
+                <td>
+                    <span>
+                        <input name ="course" type ="radio" value="1">1
+                        <input name ="course" type ="radio" value="2">2
+                        <input name ="course" type ="radio" value="3">3
+                        <input name ="course" type ="radio" value="4">4
+                    </span>
+                </td>
+                <td><span class ="errmess" id = "errcourse"></span></td>
+            </tr>
+
+            <tr>
+                <td>Расскажите о себе :</td>
+                <td><textarea id="inf" ></textarea></td>
+                <td><span class ="errmess" id = "errinf"></span></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Проверить" style="background-color: green; color:white;"></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+            let form = document.getElementById('form1');
+            form.onsubmit = function () {
+            let sname = document.getElementById('sname').value;
+            console.log(sname)
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let inf = document.getElementById('inf').value;
+            let city = document.getElementById('city').value;
+            let course = false
+            let course3 = false;
+            let bstu = document.getElementById('bstu').checked;
+
+            let messErrSname = document.getElementById('errsname');
+            let messErrName = document.getElementById('errname');
+            let messErrEmail = document.getElementById('erremail');
+            let messErrPhone = document.getElementById('errphone');
+            let messErrInf = document.getElementById('errinf');
+            let messErrCourse = document.getElementById('errcourse');
+            let messErrCity = document.getElementById('errcity');
+
+            let nameRegValid = /^[А-Яа-яA-Za-z]+$/;
+            let emailRegValid = /^[^\s@]+@[^\s@]{2,5}\.[^\s@]{2,3}$/;
+            let phoneRegValid = /^\((\d{3})\)(\d{3}-\d{2}-\d{2})$/;
+            let valid = true;
+
+                document.getElementsByName('course').forEach(el => {
+                    if (el.checked) course = true;
+                    if (el.value === "3") course3 = true;
+                })
+
+                if (sname.length === 0) {
+                    messErrSname.textContent = "Поле не должно быть пустым";
+                } else if (sname.length > 20) {
+                    messErrSname.textContent = "Фамилия не должна превышать 20 символов";
+                } else if (!nameRegValid.test(sname)) {
+                    messErrSname.textContent = "Только символы русского и латинского алфавита";
+                } else{
+                    messErrSname.textContent = "";
+                }
+
+                if (name.length === 0) {
+                    messErrName.textContent = "Поле не должно быть пустым";
+                } else if (name.length > 20) {
+                    messErrName.textContent = "Имя не должно превышать 20 символов";
+                } else if (!nameRegValid.test(name)) {
+                    messErrName.textContent = "Только символы русского и латинского алфавита";
+                } else{
+                    messErrName.textContent="";
+                }
+
+                if (email.length === 0) {
+                    messErrEmail.textContent = "Поле не должно быть пустым";
+                } else if (!emailRegValid.test(email)) {
+                    messErrEmail.textContent = "Недопустимый формат";
+                } else{
+                    messErrEmail.textContent="";
+                }
+
+                if (phone.length === 0) {
+                    messErrPhone.textContent = "Поле не должно быть пустым";
+                } else if (!phoneRegValid.test(phone)) {
+                    messErrPhone.textContent = "Недопустимый формат";
+                } else {
+                    messErrPhone.textContent="";
+                }
+
+                if (inf.length === 0) {
+                    messErrInf.textContent = "Поле не должно быть пустым";
+                } else if (inf.length > 250) {
+                    messErrInf.textContent = "Текст не должен превышать 250 символов";
+                } else{
+                    messErrInf.textContent="";
+                }
+
+                if (city === "Выберите вариант"){
+                    messErrCity.textContent="Выбор обязателен"
+                } else {
+                    messErrCity.textContent="";
+                }
+                if (!course) {
+                    messErrCourse.textContent = "Выбор обязателен";
+                } else{
+                    messErrCourse.textContent="";
+                }
+
+                if (messErrSname.textContent === "" && messErrName.textContent === "" && messErrEmail.textContent === "" && messErrPhone.textContent === "" && messErrInf.textContent === "" && messErrCourse.textContent === "" && messErrCity.textContent==="") {
+                    valid = true;
+                    if (city !== "Минск" || !course3 || !bstu) {
+                        let confirmation = confirm("Вы уверены в своих ответах?");
+                        if (!confirmation) {
+                            valid = false;
+                            return valid;
+                        }
+                    }
+                } else {
+                    valid = false;
+                }
+                return valid;
+
+            }
+
+    </script>
+</body>
+</html>
